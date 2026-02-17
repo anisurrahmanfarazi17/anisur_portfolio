@@ -122,7 +122,7 @@ export default function Admin() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-2xl font-playfair font-bold text-accent">Admin Panel</div>
+          <div className="text-2xl font-playfair font-bold text-accent">Anisur Rahman Farazi - Admin</div>
           <div className="flex gap-4 items-center">
             <span className="text-sm text-muted-foreground">Welcome, {user?.name}</span>
             <Button

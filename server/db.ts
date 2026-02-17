@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, contactMessages, InsertContactMessage, pageViews, InsertPageView } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,66 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+export async function createContactMessage(message: InsertContactMessage) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create contact message: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.insert(contactMessages).values(message);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create contact message:", error);
+    throw error;
+  }
+}
+
+export async function getContactMessages() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get contact messages: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db.select().from(contactMessages).orderBy((t) => t.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get contact messages:", error);
+    return [];
+  }
+}
+
+export async function createPageView(view: InsertPageView) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create page view: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.insert(pageViews).values(view);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create page view:", error);
+    throw error;
+  }
+}
+
+export async function getPageViewStats() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get page view stats: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db.select().from(pageViews).orderBy((t) => t.timestamp);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get page view stats:", error);
+    return [];
+  }
+}

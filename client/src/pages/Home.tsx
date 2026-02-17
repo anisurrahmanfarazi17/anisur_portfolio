@@ -162,13 +162,13 @@ Competitive Programming, Deep Thinking, Quick Learning, Teamworking, Problem Sol
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-2xl font-playfair font-bold text-accent">ARF</div>
+          <div className="text-xl font-playfair font-bold text-accent">Anisur Rahman Farazi</div>
           <div className="flex gap-6 items-center">
             <a href="#about" className="hover:text-accent transition-colors">About</a>
             <a href="#skills" className="hover:text-accent transition-colors">Skills</a>
             <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
             <a href="#blog" className="hover:text-accent transition-colors">Blog</a>
-            <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+            <a href="/contact" className="hover:text-accent transition-colors">Contact</a>
             {isAuthenticated && (
               <a href="/admin" className="hover:text-accent transition-colors font-semibold">Admin</a>
             )}
@@ -406,29 +406,33 @@ Competitive Programming, Deep Thinking, Quick Learning, Teamworking, Problem Sol
             </p>
             <div className="flex gap-6 justify-center mb-12">
               <a
-                href="https://facebook.com/anisurrahmanfarazi17"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:anisurrahmanfarazi@gmail.com"
                 className="p-3 bg-card border border-border rounded-lg hover:border-accent hover:bg-accent/10 transition-all"
               >
                 <Mail className="w-6 h-6 text-accent" />
               </a>
               <a
-                href="#"
+                href="https://github.com/anisurrahmanfarazi17/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-3 bg-card border border-border rounded-lg hover:border-accent hover:bg-accent/10 transition-all"
               >
                 <Github className="w-6 h-6 text-accent" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/anisurrahmanfarazi17/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-3 bg-card border border-border rounded-lg hover:border-accent hover:bg-accent/10 transition-all"
               >
                 <Linkedin className="w-6 h-6 text-accent" />
               </a>
             </div>
-            <Button className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-6 text-lg">
-              Send Me an Email
-            </Button>
+            <a href="/contact">
+              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-6 text-lg">
+                Send Me an Email
+              </Button>
+            </a>
           </div>
         </div>
       </section>

@@ -6,12 +6,27 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import Contact from "./pages/Contact";
+import { useEffect } from "react";
+import { trpc } from "@/lib/trpc";
 
 function Router() {
+  // Track page views
+  const trackPageView = trpc.analytics.trackPageView.useMutation();
+
+  useEffect(() => {
+    trackPageView.mutate({
+      page: window.location.pathname,
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+    });
+  }, []);
+
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"\\"} component={Home} />
+      <Route path={"/contact"} component={Contact} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
