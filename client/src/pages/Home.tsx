@@ -1,3 +1,4 @@
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Github, Linkedin, Mail, ExternalLink, Code2, Palette, Users, Trophy, Download, Calendar, BookOpen } from "lucide-react";
@@ -12,15 +13,25 @@ import { useState } from "react";
  */
 
 export default function Home() {
+  const { user, logout, isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState("skills");
 
   const articles = [
+    {
+      title: "From Magic to Logic: A First Year Student's Journey with C",
+      excerpt: "Exploring my journey learning C programming and the fundamentals of computer science as a first-year student.",
+      date: "2024",
+      category: "Programming",
+      readTime: "10 min read",
+      link: "https://medium.com/@anisurrahmanfarazi17/from-magic-to-logic-a-first-year-students-journey-with-c-8f2157d876a1",
+    },
     {
       title: "The Art of Problem Solving in Competitive Programming",
       excerpt: "Exploring strategies and techniques to approach complex algorithmic problems with confidence and efficiency.",
       date: "February 2026",
       category: "Competitive Programming",
       readTime: "8 min read",
+      link: "#",
     },
     {
       title: "Building Community Through Code: Lessons from CPCCU",
@@ -28,6 +39,7 @@ export default function Home() {
       date: "January 2026",
       category: "Community",
       readTime: "6 min read",
+      link: "#",
     },
     {
       title: "Design Meets Code: Creating Beautiful User Experiences",
@@ -35,13 +47,7 @@ export default function Home() {
       date: "December 2025",
       category: "Design & Development",
       readTime: "10 min read",
-    },
-    {
-      title: "Data Structures Demystified: A Practical Guide",
-      excerpt: "Understanding fundamental data structures and their real-world applications in solving optimization problems.",
-      date: "November 2025",
-      category: "Programming",
-      readTime: "12 min read",
+      link: "#",
     },
   ];
 
@@ -163,6 +169,9 @@ Competitive Programming, Deep Thinking, Quick Learning, Teamworking, Problem Sol
             <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
             <a href="#blog" className="hover:text-accent transition-colors">Blog</a>
             <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+            {isAuthenticated && (
+              <a href="/admin" className="hover:text-accent transition-colors font-semibold">Admin</a>
+            )}
           </div>
         </div>
       </nav>
@@ -326,33 +335,37 @@ Competitive Programming, Deep Thinking, Quick Learning, Teamworking, Problem Sol
           <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-12">Latest Articles</h2>
           <div className="space-y-6">
             {articles.map((article, idx) => (
-              <Card
+              <a
                 key={idx}
-                className="bg-card border-border p-8 hover:border-accent/50 transition-all duration-300 group cursor-pointer"
+                href={article.link}
+                target={article.link.startsWith("http") ? "_blank" : undefined}
+                rel={article.link.startsWith("http") ? "noopener noreferrer" : undefined}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="px-3 py-1 text-xs bg-accent/10 text-accent rounded-full border border-accent/20">
-                        {article.category}
-                      </span>
-                      <span className="text-xs text-muted-foreground font-mono flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {article.date}
-                      </span>
+                <Card className="bg-card border-border p-8 hover:border-accent/50 transition-all duration-300 group cursor-pointer">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="px-3 py-1 text-xs bg-accent/10 text-accent rounded-full border border-accent/20">
+                          {article.category}
+                        </span>
+                        <span className="text-xs text-muted-foreground font-mono flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {article.date}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-playfair font-bold mb-3 group-hover:text-accent transition-colors">
+                        {article.title}
+                      </h3>
                     </div>
-                    <h3 className="text-2xl font-playfair font-bold mb-3 group-hover:text-accent transition-colors">
-                      {article.title}
-                    </h3>
+                    <BookOpen className="w-5 h-5 text-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-4" />
                   </div>
-                  <BookOpen className="w-5 h-5 text-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-4" />
-                </div>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{article.excerpt}</p>
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <span className="text-sm text-muted-foreground font-mono">{article.readTime}</span>
-                  <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </Card>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{article.excerpt}</p>
+                  <div className="flex items-center justify-between pt-4 border-t border-border">
+                    <span className="text-sm text-muted-foreground font-mono">{article.readTime}</span>
+                    <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </Card>
+              </a>
             ))}
           </div>
         </div>
