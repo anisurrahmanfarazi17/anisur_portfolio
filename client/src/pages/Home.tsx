@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Github, Linkedin, Mail, ExternalLink, Code2, Palette, Users, Trophy } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, Code2, Palette, Users, Trophy, Download, Calendar, BookOpen } from "lucide-react";
 import { useState } from "react";
 
 /**
@@ -13,6 +13,37 @@ import { useState } from "react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("skills");
+
+  const articles = [
+    {
+      title: "The Art of Problem Solving in Competitive Programming",
+      excerpt: "Exploring strategies and techniques to approach complex algorithmic problems with confidence and efficiency.",
+      date: "February 2026",
+      category: "Competitive Programming",
+      readTime: "8 min read",
+    },
+    {
+      title: "Building Community Through Code: Lessons from CPCCU",
+      excerpt: "How organizing programming contests and events can foster a vibrant tech community and inspire the next generation of developers.",
+      date: "January 2026",
+      category: "Community",
+      readTime: "6 min read",
+    },
+    {
+      title: "Design Meets Code: Creating Beautiful User Experiences",
+      excerpt: "The intersection of graphic design and web development—how visual aesthetics and technical implementation work together to create compelling digital products.",
+      date: "December 2025",
+      category: "Design & Development",
+      readTime: "10 min read",
+    },
+    {
+      title: "Data Structures Demystified: A Practical Guide",
+      excerpt: "Understanding fundamental data structures and their real-world applications in solving optimization problems.",
+      date: "November 2025",
+      category: "Programming",
+      readTime: "12 min read",
+    },
+  ];
 
   const skills = {
     technical: [
@@ -73,6 +104,53 @@ export default function Home() {
     },
   ];
 
+  const handleDownloadResume = () => {
+    const resumeContent = `ANISUR RAHMAN FARAZI
+Computer Science Student | Competitive Programmer | Graphic Designer
+
+CONTACT
+Email: anisurrahmanfarazi17@gmail.com
+Facebook: facebook.com/anisurrahmanfarazi17
+Location: Bangladesh
+
+EDUCATION
+City University, Bangladesh
+Bachelor of Science in Computer Science and Engineering
+67th Batch
+
+Savar Govt. College
+Higher Secondary Certificate (HSC)
+
+SKILLS
+Technical: C Programming, Competitive Programming, Data Structures, Algorithms
+Creative: Graphic Design, UI/UX Design, Visual Communication
+Professional: Microsoft Office (Expert), Team Leadership, Event Management, Quick Learning
+
+EXPERIENCE
+Social Media Manager - Competitive Programming Camp City University (CPCCU)
+- Managing social media presence and announcements
+- Creating promotional materials and posters
+- Organizing online contests and writing competitions
+
+PROJECTS & ACHIEVEMENTS
+- Beyond the Code: Article Writing Contest 2026 (Organizer)
+- Code Breeze and Freeze Contest Series (Manager)
+- ICPC Asia Dhaka Regional Preliminary (Participant, November 2025)
+- Fiverr Graphic Design Services (Freelancer, January 2026)
+- The Programmer's Pen Article Writing Contest 2025 (Participant)
+
+COMPETENCIES
+Competitive Programming, Deep Thinking, Quick Learning, Teamworking, Problem Solving`;
+
+    const element = document.createElement("a");
+    element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(resumeContent));
+    element.setAttribute("download", "Anisur_Rahman_Farazi_Resume.txt");
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -83,6 +161,7 @@ export default function Home() {
             <a href="#about" className="hover:text-accent transition-colors">About</a>
             <a href="#skills" className="hover:text-accent transition-colors">Skills</a>
             <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
+            <a href="#blog" className="hover:text-accent transition-colors">Blog</a>
             <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
           </div>
         </div>
@@ -108,12 +187,17 @@ export default function Home() {
               <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
                 Computer Science Student at City University. Competitive Programmer. Graphic Designer. Passionate about solving complex problems and creating beautiful digital experiences.
               </p>
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-4 pt-4 flex-wrap">
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
                   Get in Touch
                 </Button>
-                <Button variant="outline" className="border-accent text-accent hover:bg-accent/10">
-                  View My Work
+                <Button 
+                  variant="outline" 
+                  className="border-accent text-accent hover:bg-accent/10 flex items-center gap-2"
+                  onClick={handleDownloadResume}
+                >
+                  <Download className="w-4 h-4" />
+                  Download Resume
                 </Button>
               </div>
             </div>
@@ -236,8 +320,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section id="blog" className="py-20">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-12">Latest Articles</h2>
+          <div className="space-y-6">
+            {articles.map((article, idx) => (
+              <Card
+                key={idx}
+                className="bg-card border-border p-8 hover:border-accent/50 transition-all duration-300 group cursor-pointer"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-3 py-1 text-xs bg-accent/10 text-accent rounded-full border border-accent/20">
+                        {article.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground font-mono flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {article.date}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-playfair font-bold mb-3 group-hover:text-accent transition-colors">
+                      {article.title}
+                    </h3>
+                  </div>
+                  <BookOpen className="w-5 h-5 text-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-4" />
+                </div>
+                <p className="text-muted-foreground mb-4 leading-relaxed">{article.excerpt}</p>
+                <div className="flex items-center justify-between pt-4 border-t border-border">
+                  <span className="text-sm text-muted-foreground font-mono">{article.readTime}</span>
+                  <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
-      <section className="py-20">
+      <section className="py-20 bg-card/30 border-y border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-12">Experience</h2>
           <div className="space-y-8">
