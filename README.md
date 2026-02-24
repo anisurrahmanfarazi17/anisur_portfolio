@@ -153,14 +153,6 @@ The portfolio uses Tailwind CSS for styling. To modify colors and styles:
 
 ## 🌐 Deploying to Production
 
-### Option 1: Deploy on Manus (Recommended)
-
-1. Click the **Publish** button in the Manus Management UI
-2. Your portfolio will be live at a unique URL
-3. You can connect a custom domain in the settings
-
-### Option 2: Deploy on Other Platforms
-
 #### Deploying on Railway
 
 1. Create an account at [Railway.app](https://railway.app/)
@@ -281,4 +273,4 @@ After setting up the project locally:
 
 **Made with ❤️ by Anisur Rahman Farazi**
 
-For more information, visit my portfolio at [your-domain.com](https://your-domain.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/anisurrahmanfarazi17/) and [GitHub](https://github.com/anisurrahmanfarazi17/).
+For more information, connect with me on [LinkedIn](https://www.linkedin.com/in/anisurrahmanfarazi17/) and [GitHub](https://github.com/anisurrahmanfarazi17/).
